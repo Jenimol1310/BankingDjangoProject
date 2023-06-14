@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Application Submitted</title>
+    <style>
+        .form-container {
+            display: none;
+        }
+    </style>
+    <script>
+        function showForm() {
+            document.getElementById("form-container").style.display = "block";
+        }
+    </script>
+</head>
+<body>
+    <h1>Application Submitted</h1>
+    <p>Your application has been accepted.</p>
+    <p>Thank you for applying!</p>
+    <button onclick="location.href='{% url 'login' %}'">Go to Login Page</button>
+    <button onclick="location.href='{% url 'home' %}'">logout</button>
+
+    <div id="form-container">
+        <h2>Form</h2>
+        <form>
+            <!-- Form fields go here -->
+        </form>
+    </div>
+</body>
+</html>

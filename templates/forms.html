@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Form</title>
+    <script>
+        function updateBranches() {
+            var districtSelect = document.getElementById('district');
+            var branchSelect = document.getElementById('branch');
+
+            // Clear the branch options
+            branchSelect.innerHTML = '';
+
+            // Get the selected district value
+            var selectedDistrict = districtSelect.value;
+
+            // Define the branches based on the selected district
+            var branches = {
+                district1: ['ERUMELY', 'MUNDAKAYAM'],
+                district2: ['KAYAMKULAM', 'AMBALAPUZHA'],
+                district3: ['KUMALI','KATTAPANA'],
+                district4: ['THAMARASHERI','KAPPAD'],
+                district5: ['ALUVA','KALAMASHERI']
+            };
+
+            // Add the branch options based on the selected district
+            var selectedBranches = branches[selectedDistrict];
+            for (var i = 0; i < selectedBranches.length; i++) {
+                var branchOption = document.createElement('option');
+                branchOption.value = selectedBranches[i];
+                branchOption.text = selectedBranches[i];
+                branchSelect.appendChild(branchOption);
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Application Form</h1>
+    <form action="{% url 'submit' %}" method="POST">
+        {% csrf_token %}
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+        <br><br>
+        <label for="dob">DOB:</label>
+        <input type="date" id="dob" name="dob" required>
+        <br><br>
+        <label for="age">Age:</label>
+        <input type="number" id="age" name="age" required>
+        <br><br>
+        <label for="gender">Gender:</label>
+        <select id="gender" name="gender" required>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+        </select>
+        <br><br>
+        <label for="phone">Phone Number:</label>
+        <input type="tel" id="phone" name="phone" required>
+        <br><br>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        <br><br>
+        <label for="address">Address:</label>
+        <textarea id="address" name="address" required></textarea>
+        <br><br>
+        <label for="district">District:</label>
+        <select id="district" name="district" required onchange="updateBranches()">
+            <option value="district1">KOTTAYAM</option>
+            <option value="district2">ALAPUZHA</option>
+            <option value="district3">IDUKKI</option>
+            <option value="district4">KOZHIKODE</option>
+            <option value="district5">ERNAKULAM</option>
+        </select>
+        <br><br>
+        <label for="branch">Branch:</label>
+        <select id="branch" name="branch" required>
+            <!-- Branch options will be dynamically added here -->
+        </select>
+        <br><br>
+        <label for="account_type">Account Type:</label>
+        <select id="account_type" name="account_type" required>
+            <option value="savings">Savings Account</option>
